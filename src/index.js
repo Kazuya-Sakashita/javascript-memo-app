@@ -5,13 +5,16 @@ const onClickAdd = () => {
   // テキストボックスの値を取得
   const text = textEl.value;
 
+  // テキストボックスが空の場合は処理しない
+  if (text === "") return;
+
   // liタグを生成
   const li = document.createElement("li");
 
   // divタグを生成
   const div = document.createElement("div");
 
-  //pタグ生成
+  // pタグ生成
   const p = document.createElement("p");
   p.textContent = text;
 
@@ -22,22 +25,24 @@ const onClickAdd = () => {
   // ボタン押下時に行を削除する処理
   button.addEventListener("click", () => {
     // 削除対象の行(li)を取得
-    // closestは親要素に一致する文字列を探すメソッド
     const deleteTarget = button.closest("li");
 
     // ulタグ配下から上記で特定した行を削除
     document.getElementById("memo-list").removeChild(deleteTarget);
   });
 
-  // divタグ配下にPタグとbuttonタグを設定
+  // divタグ配下にpタグとbuttonタグを設定
   div.appendChild(p);
   div.appendChild(button);
 
-  //liタグ配下にdivタグを設定
+  // liタグ配下にdivタグを設定
   li.appendChild(div);
 
-  //メモ一覧のリストに上記のliタグに設定
+  // メモ一覧のリストに上記のliタグを設定
   document.getElementById("memo-list").appendChild(li);
+
+  // テキストボックスを空にする
+  textEl.value = "";
 };
 
 // [追加]ボタン押下時にonClickAdd関数を実行するように登録
